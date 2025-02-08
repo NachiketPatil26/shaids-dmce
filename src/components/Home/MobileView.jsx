@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Grid from "../Home/Cards";
 import assets from "../../assets/asset";
+import Footer from "../Common/Footer";
 
 const MobileView = () => {
   const location = useLocation();
@@ -71,9 +72,9 @@ const MobileView = () => {
   };
 
   return (
-    <div className="flex flex-col w-full min-h-screen">
+    <div className="flex flex-col w-full">
       {/* Hero Section */}
-      <section className="relative w-full h-[100vh] md:h-auto md:aspect-video overflow-hidden">
+      <section className="relative w-full min-h-screen flex items-center justify-center bg-black sm:-translate-y-[150px]">
         <video
           src={assets.hero_start_vid}
           autoPlay
@@ -81,9 +82,7 @@ const MobileView = () => {
           playsInline
           preload="auto"
           onEnded={handleStartVideoEnd}
-          className={`w-full h-full object-cover absolute top-0 left-0 ${
-            showLoopVideo ? "hidden" : "block"
-          }`}
+          className={`w-full object-cover ${showLoopVideo ? "hidden" : "block"}`}
         />
         <video
           ref={loopVideoRef}
@@ -92,16 +91,14 @@ const MobileView = () => {
           loop
           playsInline
           preload="auto"
-          className={`w-full h-full object-cover absolute top-0 left-0 ${
-            showLoopVideo ? "block" : "hidden"
-          }`}
+          className={`w-full object-cover ${showLoopVideo ? "block" : "hidden"}`}
         />
       </section>
 
       {/* Discover Section */}
       <section 
         ref={gridSectionRef}
-        className="relative w-full h-[100vh] overflow-hidden scroll-mt-0"
+        className="relative w-full min-h-screen flex items-center justify-center bg-black scroll-mt-16 sm:-translate-y-[150px]"
       >
         {!showGrid && (
           <video
@@ -111,18 +108,14 @@ const MobileView = () => {
             muted
             playsInline
             preload="auto"
-            className={`w-full h-full object-cover transition-opacity duration-500 ease-in-out ${
-              showDiscoverInVideo
-                ? "opacity-0"
-                : `opacity-${discoverVideoOpacity}`
-            }`}
+            className={`w-full h-full object-cover transition-opacity duration-500 ease-in-out ${showDiscoverInVideo ? "opacity-0" : `opacity-${discoverVideoOpacity}`}`}
           />
         )}
 
         {showButton && !showGrid && (
           <button
             onClick={handleDiscoverClick}
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-[40px] z-10
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10
               px-6 py-2 bg-white text-black rounded-full hover:bg-opacity-90
               transition-opacity duration-500 ease-in-out ${buttonOpacity}`}
           >
@@ -138,22 +131,21 @@ const MobileView = () => {
             playsInline
             preload="auto"
             onEnded={handleDiscoverVideoEnd}
-            className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-300 ease-in-out ${
-              showDiscoverInVideo ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ playbackRate: 2 }}
+            className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-300 ease-in-out ${showDiscoverInVideo ? "opacity-100" : "opacity-0"}`}
           />
         )}
 
         {/* Grid Section */}
         <div
-          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ${
-            showGrid ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
+          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ${showGrid ? "opacity-100 z-10" : "opacity-0 z-0"}`}
         >
           {showGrid && <Grid />}
         </div>
       </section>
+      {/* Footer */}
+      <div className="sm:-translate-y-[150px]">
+      <Footer />
+      </div>
     </div>
   );
 };

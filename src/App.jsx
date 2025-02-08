@@ -14,11 +14,11 @@ const App = () => {
 
   const [showMain, setShowMain] = useState(false);
   
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 850);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1025);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1025);
     };
 
     window.addEventListener("resize", handleResize);
